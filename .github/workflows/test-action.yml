@@ -1,0 +1,46 @@
+#  Pico Build Action - Action test workflow.
+#  Copyright 2024 Samyar Sadat Akhavi
+#  Written by Samyar Sadat Akhavi, 2024.
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https: www.gnu.org/licenses/>.
+
+name: Test Pico Build Action
+on: push
+
+jobs:
+    test_build:
+        name: Build example blink program
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Build Blink Example
+              id: build
+              uses: ./
+              with:
+                  source_dir: "test_program"
+                  output_dir: "build"
+                  output_ext: "*.uf2 *.elf *.elf.map *.hex *.bin *.dis"
+                  cmake_args: "-DCMAKE_BUILD_TYPE=Debug"
+
+            - name: Upload Build Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: workspace_artifacts
+                  path: ${{steps.build.outputs.output_dir}}
+                  if-no-files-found: warn

@@ -1,0 +1,61 @@
+#  Pico Build Action - Action Metadata.
+#  Copyright 2024 Samyar Sadat Akhavi
+#  Written by Samyar Sadat Akhavi, 2024.
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https: www.gnu.org/licenses/>.
+
+name: "Pico Build Action"
+description: "Action for building Raspberry Pi Pico (RP2040) C/C++ code."
+author: "Samyar Sadat Akhavi <samyarsadat@gigawhat.net>"
+
+inputs:
+    source_dir:
+        description: "Source code directory. The CMakeLists.txt file should be here."
+        required: true
+        default: "src"
+    output_dir:
+        description: "Output directory for build artifacts. This path is relative to the source directory."
+        required: false
+        default: "build"
+    output_ext:
+        description: "A space-separated list of output binary file extensions. Default is '*.uf2 *.elf *.elf.map'. There must be a '*' before each extension."
+        required: false
+        default: "*.uf2 *.elf *.elf.map"
+    board_name:
+        description: "Name of the RP2040 board. Default is 'pico'. Please refer to the Pico SDK documentation for a list of supported boards."
+        required: false
+        default: "pico"
+    cmake_args:
+        description: "Additional list arguments to pass to CMake."
+        required: false
+        default: ""
+    output_ignored_dirs:
+        description: "A space-separated list of directories to ignore when copying binary build artifacts. CMakeFiles, pico-sdk, pioasm, and elf2uf2 are ignored regardless."
+        required: false
+        default: ""
+
+outputs:
+    output_dir:
+        description: "Relative path to output directory for build artifacts."
+
+runs:
+    using: "docker"
+    image: "Dockerfile"
+    args:
+        - ${{ inputs.source_dir }}
+        - ${{ inputs.output_dir }}
+        - ${{ inputs.output_ext }}
+        - ${{ inputs.board_name }}
+        - ${{ inputs.cmake_args }}
+        - ${{ inputs.output_ignored_dirs }}
