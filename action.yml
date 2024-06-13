@@ -19,6 +19,10 @@ name: "Pico Build Action"
 description: "Action for building Raspberry Pi Pico (RP2040) C/C++ code."
 author: "Samyar Sadat Akhavi <samyarsadat@gigawhat.net>"
 
+branding:
+    color: "red"
+    icon: "package"
+
 inputs:
     source_dir:
         description: "Source code directory. The CMakeLists.txt file should be here."
