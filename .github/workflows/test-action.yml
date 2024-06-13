@@ -31,7 +31,7 @@ jobs:
 
             - name: Build Blink Example
               id: build
-              uses: ./
+              uses: samyarsadat/Pico-Build-Action@v1
               with:
                   source_dir: "test_program"
                   output_dir: "build"
