@@ -2,7 +2,7 @@
 
 <p align='center'>
     <br>
-    <a href='https://github.com/samyarsadat/Pico-Build-Action'><img src='https://github.com/samyarsadat/Pico-Build-Action/blob/main/.github/images/gh_actions_logo.png'></a>
+    <a href='https://github.com/samyarsadat/Pico-Build-Action'><img src='https://github.com/samyarsadat/Pico-Build-Action/blob/main/.github/images/logo.png'></a>
     <br><br>
     <a href='https://github.com/samyarsadat/Pico-Build-Action/blob/main/LICENSE'><img src='https://img.shields.io/github/license/samyarsadat/Pico-Build-Action'></a>
     |
@@ -37,7 +37,7 @@ This is a Docker container action.
 <br>
 
 ## Example usage
-```
+```YAML
 jobs:
     test_build:
         name: Build example blink program
