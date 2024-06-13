@@ -43,4 +43,4 @@ jobs:
               with:
                   name: workspace_artifacts
                   path: ${{steps.build.outputs.output_dir}}
-                  if-no-files-found: warn
+                  if-no-files-found: error
