@@ -1,25 +1,25 @@
 <h1 align="center">Pico Build Action</h1>
 
+![banner](.github/images/logo_dark.png#gh-dark-mode-only)
+![banner](.github/images/logo_light.png#gh-light-mode-only)
+
 <p align='center'>
-    <br>
-    <a href='https://github.com/samyarsadat/Pico-Build-Action'><img src='https://github.com/samyarsadat/Pico-Build-Action/blob/main/.github/images/logo.png'></a>
-    <br><br>
     <a href='https://github.com/samyarsadat/Pico-Build-Action/blob/main/LICENSE'><img src='https://img.shields.io/github/license/samyarsadat/Pico-Build-Action'></a>
     |
     <a href='https://github.com/samyarsadat/Pico-Build-Action/issues'><img src='https://img.shields.io/github/issues/samyarsadat/Pico-Build-Action'></a>
     |
     <a href='https://github.com/samyarsadat/Pico-Build-Action/actions/workflows/test-action.yml'><img src='https://github.com/samyarsadat/Pico-Build-Action/actions/workflows/test-action.yml/badge.svg'></a>
-    <br><br>
 </p>
 
+<br><br>
 
 ----
 This is a GitHub Action for building Raspberry Pi Pico (RP2040) C/C++ code.<br>
 This is a Docker container action.
 <br><br>
 
-## Inputs
 
+## Inputs
 | Name                | Description                                                                                                                                                        | Required | Default                      |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------- |
 | `source_dir`          | _Source code directory. The `CMakeLists.txt` file should be here._                                                                                               | Yes      | `"src"`                      |
@@ -62,7 +62,6 @@ jobs:
                   name: workspace_artifacts
                   path: ${{steps.build.outputs.output_dir}}
 ```
-
 <br><br>
 
 
