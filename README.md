@@ -20,11 +20,11 @@ This is a Docker container action.
 
 
 ## Inputs
-| Name                | Description                                                                                                                                                        | Required | Default                      |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------- |
+| Name                  | Description                                                                                                                                                      | Required | Default                      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------- |
 | `source_dir`          | _Source code directory. The `CMakeLists.txt` file should be here._                                                                                               | Yes      | `"src"`                      |
 | `output_dir`          | _Output directory for build artifacts. This path is relative to the source directory._                                                                           | No       | `"build"`                    |
-| `output_ext`          | _A space-separated list of output binary file extensions. There must be a '*' before each extension._                                                            | No       | `"*.uf2 *.elf *.elf.map"` |
+| `output_ext`          | _A space-separated list of output binary file extensions. There must be a '*' before each extension._                                                            | No       | `"*.uf2 *.elf *.elf.map"`    |
 | `board_name`          | _Name of the RP2040 board. Please refer to the Pico SDK documentation for a list of supported boards._                                                           | No       | `"pico"`                     |
 | `cmake_args`          | _Additional list arguments to pass to CMake._                                                                                                                    | No       | `""`                         |
 | `output_ignored_dirs` | _A space-separated list of directories to ignore when copying binary build artifacts. `CMakeFiles`, `pico-sdk`, `pioasm`, and `elf2uf2` are ignored regardless._ | No       | `""`                         |
@@ -51,7 +51,7 @@ jobs:
 
             - name: Build Blink Example
               id: build
-              uses: ./
+              uses: samyarsadat/Pico-Build-Action@v1
               with:
                   source_dir: "test_program"
                   cmake_args: "-DCMAKE_BUILD_TYPE=Debug"
