@@ -26,7 +26,7 @@ This is a Docker container action.
 | `output_dir`          | _Output directory for build artifacts. This path is relative to the source directory._                                                                           | No       | `"build"`                    |
 | `output_ext`          | _A space-separated list of output binary file extensions. There must be a '*' before each extension._                                                            | No       | `"*.uf2 *.elf *.elf.map"`    |
 | `board_name`          | _Name of the RP2040 board. Please refer to the Pico SDK documentation for a list of supported boards._                                                           | No       | `"pico"`                     |
-| `cmake_args`          | _Additional list arguments to pass to CMake._                                                                                                                    | No       | `""`                         |
+| `cmake_args`          | _Additional arguments to pass to CMake._                                                                                                                         | No       | `""`                         |
 | `output_ignored_dirs` | _A space-separated list of directories to ignore when copying binary build artifacts. `CMakeFiles`, `pico-sdk`, `pioasm`, and `elf2uf2` are ignored regardless._ | No       | `""`                         |
 <br>
 
