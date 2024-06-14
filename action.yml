@@ -41,7 +41,7 @@ inputs:
         required: false
         default: "pico"
     cmake_args:
-        description: "Additional list arguments to pass to CMake."
+        description: "Additional arguments to pass to CMake."
         required: false
         default: ""
     output_ignored_dirs:
