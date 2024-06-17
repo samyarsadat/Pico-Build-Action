@@ -79,7 +79,7 @@ echo "IGNORED_BUILD_DIRS=${IGNORED_BUILD_DIRS[@]}"
 # Build the project
 echo "Generating build files..."
 mkdir "$OUTPUT_DIR" && cd "$OUTPUT_DIR"
-cmake -DPICO_BOARD="$BOARD_NAME" $CMAKE_ARGS "$SOURCE_DIR"
+cmake -DPICO_BOARD="$BOARD_NAME" $CMAKE_ARGS -S "$SOURCE_DIR" -B "$OUTPUT_DIR"
 
 if [ "$CMAKE_CONFIG_ONLY" = "false" ]; then
     echo "Building project..."
