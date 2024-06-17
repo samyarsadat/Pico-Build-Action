@@ -22,12 +22,12 @@ set -e
 DEFAULT_IGNORED_BUILD_DIRS=("CMakeFiles" "elf2uf2" "pico-sdk" "pioasm")
 
 # Get arguments
-SOURCE_DIR=$1
-OUTPUT_DIR=$2
-OUTPUT_EXT=$3
-BOARD_NAME=$4
-CMAKE_ARGS=$5
-OUTPUT_IGNORED_DIRS=$6
+SOURCE_DIR="$1"
+OUTPUT_DIR="$2"
+OUTPUT_EXT="$3"
+BOARD_NAME="$4"
+CMAKE_ARGS="$5"
+OUTPUT_IGNORED_DIRS="$6"
 
 # Split output extensions and into array
 IFS=" " read -r -a BINARY_EXTENSIONS <<< "$OUTPUT_EXT"
@@ -77,8 +77,8 @@ echo "IGNORED_BUILD_DIRS=${IGNORED_BUILD_DIRS[@]}"
 
 # Build the project
 echo "Building the project..."
-mkdir $OUTPUT_DIR && cd $OUTPUT_DIR
-cmake -DPICO_BOARD=$BOARD_NAME $CMAKE_ARGS $SOURCE_DIR
+mkdir "$OUTPUT_DIR" && cd "$OUTPUT_DIR"
+cmake -DPICO_BOARD="$BOARD_NAME" $CMAKE_ARGS "$SOURCE_DIR"
 make -j$(nproc)
 
 # Remove ignored build directories
@@ -104,11 +104,11 @@ done
 
 # Clear the build directory
 echo "Clearing the build directory..."
-rm -rf $OUTPUT_DIR && mkdir $OUTPUT_DIR
+rm -rf "$OUTPUT_DIR" && mkdir "$OUTPUT_DIR"
 
 # Move the build artifacts back to the output directory
 echo "Moving build artifacts back to the output directory..."
-mv /tmp/make_build/* $OUTPUT_DIR
+mv /tmp/make_build/* "$OUTPUT_DIR"
 
 # Add output directory path to GITHUB_OUTPUT
 echo "output_dir=$OUTPUT_DIR_RELATIVE" >> $GITHUB_OUTPUT
