@@ -48,6 +48,10 @@ inputs:
         description: "A space-separated list of directories to ignore when copying binary build artifacts. CMakeFiles, pico-sdk, pioasm, and elf2uf2 are ignored regardless."
         required: false
         default: ""
+    cmake_config_only:
+        description: "Only configure CMake and generate build files. Do not build the project."
+        required: false
+        default: "false"
 
 outputs:
     output_dir:
@@ -63,3 +67,4 @@ runs:
         - ${{ inputs.board_name }}
         - ${{ inputs.cmake_args }}
         - ${{ inputs.output_ignored_dirs }}
+        - ${{ inputs.cmake_config_only }}

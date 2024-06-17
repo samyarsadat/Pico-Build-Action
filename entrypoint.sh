@@ -28,6 +28,7 @@ OUTPUT_EXT="$3"
 BOARD_NAME="$4"
 CMAKE_ARGS="$5"
 OUTPUT_IGNORED_DIRS="$6"
+CMAKE_CONFIG_ONLY="$7"
 
 # Split output extensions and into array
 IFS=" " read -r -a BINARY_EXTENSIONS <<< "$OUTPUT_EXT"
@@ -76,39 +77,43 @@ echo "CMAKE_ARGS=$CMAKE_ARGS"
 echo "IGNORED_BUILD_DIRS=${IGNORED_BUILD_DIRS[@]}"
 
 # Build the project
-echo "Building the project..."
+echo "Generating build files..."
 mkdir "$OUTPUT_DIR" && cd "$OUTPUT_DIR"
 cmake -DPICO_BOARD="$BOARD_NAME" $CMAKE_ARGS "$SOURCE_DIR"
-make -j$(nproc)
 
-# Remove ignored build directories
-echo "Removing unnecessary build directories..."
-for dir in "${IGNORED_BUILD_DIRS[@]}"; do
-    if [ -d "$OUTPUT_DIR/$dir" ]; then
-        echo "Removing $dir..."
-        rm -rf "$OUTPUT_DIR/$dir"
-    fi
-done
+if [ "$CMAKE_CONFIG_ONLY" = "false" ]; then
+    echo "Building project..."
+    make -j$(nproc)
 
-# Move the build artifacts to temporary directory
-echo "Moving build artifacts to temporary directory..."
-COPY_DEST_DIR="/tmp/make_build"
-for ext in "${BINARY_EXTENSIONS[@]}"; do
-    find "$OUTPUT_DIR" -name "$ext" -print0 | while IFS= read -r -d '' file; do
-        echo "Copying $file..."
-        relative_path="${file#$OUTPUT_DIR/}"
-        mkdir -p "$COPY_DEST_DIR/$(dirname "$relative_path")"
-        cp "$file" "$COPY_DEST_DIR/$relative_path"
+    # Remove ignored build directories
+    echo "Removing unnecessary build directories..."
+    for dir in "${IGNORED_BUILD_DIRS[@]}"; do
+        if [ -d "$OUTPUT_DIR/$dir" ]; then
+            echo "Removing $dir..."
+            rm -rf "$OUTPUT_DIR/$dir"
+        fi
     done
-done
 
-# Clear the build directory
-echo "Clearing the build directory..."
-rm -rf "$OUTPUT_DIR" && mkdir "$OUTPUT_DIR"
+    # Move the build artifacts to temporary directory
+    echo "Moving build artifacts to temporary directory..."
+    COPY_DEST_DIR="/tmp/make_build"
+    for ext in "${BINARY_EXTENSIONS[@]}"; do
+        find "$OUTPUT_DIR" -name "$ext" -print0 | while IFS= read -r -d '' file; do
+            echo "Copying $file..."
+            relative_path="${file#$OUTPUT_DIR/}"
+            mkdir -p "$COPY_DEST_DIR/$(dirname "$relative_path")"
+            cp "$file" "$COPY_DEST_DIR/$relative_path"
+        done
+    done
 
-# Move the build artifacts back to the output directory
-echo "Moving build artifacts back to the output directory..."
-mv /tmp/make_build/* "$OUTPUT_DIR"
+    # Clear the build directory
+    echo "Clearing the build directory..."
+    rm -rf "$OUTPUT_DIR" && mkdir "$OUTPUT_DIR"
+
+    # Move the build artifacts back to the output directory
+    echo "Moving build artifacts back to the output directory..."
+    mv /tmp/make_build/* "$OUTPUT_DIR"
+fi
 
 # Add output directory path to GITHUB_OUTPUT
 echo "output_dir=$OUTPUT_DIR_RELATIVE" >> $GITHUB_OUTPUT

@@ -28,6 +28,7 @@ This is a Docker container action.
 | `board_name`          | _Name of the RP2040 board. Please refer to the Pico SDK documentation for a list of supported boards._                                                           | No       | `"pico"`                     |
 | `cmake_args`          | _Additional arguments to pass to CMake._                                                                                                                         | No       | `""`                         |
 | `output_ignored_dirs` | _A space-separated list of directories to ignore when copying binary build artifacts. `CMakeFiles`, `pico-sdk`, `pioasm`, and `elf2uf2` are ignored regardless._ | No       | `""`                         |
+| `cmake_config_only`   | _Only configure CMake and generate build files. Do not build the project._                                                                                       | No       | `"false"`                    |
 <br>
 
 ## Outputs
