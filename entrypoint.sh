@@ -90,8 +90,7 @@ cmake -DPICO_BOARD="$BOARD_NAME" -S "$SOURCE_DIR" -B "$OUTPUT_DIR" -G "$MAKEFILE
 
 if [ "$CMAKE_CONFIG_ONLY" = "false" ]; then
     echo "Building project..."
-    echo "PWD: $(pwd)"
-    make -j$(nproc)
+    cd "$OUTPUT_DIR" && make -j$(nproc)
 
     # Remove ignored build directories
     echo "Removing unnecessary build directories..."
