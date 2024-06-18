@@ -53,9 +53,9 @@ inputs:
         required: false
         default: "false"
     makefiles_generator:
-        description: "CMake generator to use for generating build files. Default is 'Ninja'."
+        description: "CMake generator to use for generating build files. Default is 'Unix Makefiles'."
         required: false
-        default: "Ninja"
+        default: "Unix Makefiles"
 
 outputs:
     output_dir:
