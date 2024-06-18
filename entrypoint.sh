@@ -87,8 +87,6 @@ echo "MAKEFILES_GENERATOR=$MAKEFILES_GENERATOR"
 echo "Generating build files..."
 mkdir "$OUTPUT_DIR" && cd "$OUTPUT_DIR"
 cmake -DPICO_BOARD="$BOARD_NAME" -S "$SOURCE_DIR" -B "$OUTPUT_DIR" -G "$MAKEFILES_GENERATOR" $CMAKE_ARGS
-apt-get update && apt-get install -y tree
-tree "$OUTPUT_DIR"
 
 if [ "$CMAKE_CONFIG_ONLY" = "false" ]; then
     echo "Building project..."
