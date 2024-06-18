@@ -52,6 +52,10 @@ inputs:
         description: "Only configure CMake and generate build files. Do not build the project."
         required: false
         default: "false"
+    makefiles_generator:
+        description: "CMake generator to use for generating build files. Default is 'Ninja'."
+        required: false
+        default: "Ninja"
 
 outputs:
     output_dir:
@@ -68,3 +72,4 @@ runs:
         - ${{ inputs.cmake_args }}
         - ${{ inputs.output_ignored_dirs }}
         - ${{ inputs.cmake_config_only }}
+        - ${{ inputs.makefiles_generator }}
