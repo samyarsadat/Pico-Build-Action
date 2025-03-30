@@ -19,17 +19,17 @@
 # Set minimum required version of CMake
 cmake_minimum_required(VERSION 3.12)
 
+# Set Pico Board and Pico Platform
+set(PICO_PLATFORM rp2350-arm-s)
+set(PICO_BOARD pico2)
+
 # Include build functions from the Pico SDK
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
 # Set project name and C/C++ standards
-project(Blink VERSION 0.1.0 LANGUAGES C CXX ASM)
+string(TIMESTAMP DATEVER "%Y.%m.%d" UTC)
+project(Blink VERSION ${DATEVER} LANGUAGES C ASM)
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
-
-# Set Pico Board and Pico Platform
-set(PICO_PLATFORM rp2350-arm-s)
-set(PICO_BOARD pico2)
 
 # Initialize the Pico SDK
 pico_sdk_init()
@@ -50,4 +50,3 @@ pico_set_program_description(${PROJECT_NAME} "Pico Build Action - Simple blink t
 
 # CMake flags
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
