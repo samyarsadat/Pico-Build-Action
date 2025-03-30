@@ -27,6 +27,10 @@ project(Blink VERSION 0.1.0 LANGUAGES C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+# Set Pico Board and Pico Platform
+set(PICO_PLATFORM rp2350-arm-s)
+set(PICO_BOARD pico2)
+
 # Initialize the Pico SDK
 pico_sdk_init()
 

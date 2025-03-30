@@ -16,7 +16,7 @@
 #  along with this program.  If not, see <https: www.gnu.org/licenses/>.
 
 name: "Pico Build Action"
-description: "Action for building Raspberry Pi Pico (RP2040) C/C++ code."
+description: "Action for building Raspberry Pi Pico C/C++ code."
 author: "Samyar Sadat Akhavi <samyarsadat@gigawhat.net>"
 
 branding:
@@ -36,10 +36,6 @@ inputs:
         description: "A space-separated list of output binary file extensions. Default is '*.uf2 *.elf *.elf.map'. There must be a '*' before each extension."
         required: false
         default: "*.uf2 *.elf *.elf.map"
-    board_name:
-        description: "Name of the RP2040 board. Default is 'pico'. Please refer to the Pico SDK documentation for a list of supported boards."
-        required: false
-        default: "pico"
     cmake_args:
         description: "Additional arguments to pass to CMake."
         required: false
@@ -68,7 +64,6 @@ runs:
         - ${{ inputs.source_dir }}
         - ${{ inputs.output_dir }}
         - ${{ inputs.output_ext }}
-        - ${{ inputs.board_name }}
         - ${{ inputs.cmake_args }}
         - ${{ inputs.output_ignored_dirs }}
         - ${{ inputs.cmake_config_only }}

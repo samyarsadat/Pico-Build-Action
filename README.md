@@ -14,7 +14,7 @@
 <br><br>
 
 ----
-This is a GitHub Action for building Raspberry Pi Pico (RP2040) C/C++ code.<br>
+This is a GitHub Action for building Raspberry Pi Pico C/C++ code.<br>
 This is a Docker container action.
 <br><br>
 
@@ -25,7 +25,6 @@ This is a Docker container action.
 | `source_dir`          | _Source code directory. The `CMakeLists.txt` file should be here._                                                                                               | Yes      | `"src"`                      |
 | `output_dir`          | _Output directory for build artifacts. This path is relative to the source directory._                                                                           | No       | `"build"`                    |
 | `output_ext`          | _A space-separated list of output binary file extensions. There must be a '*' before each extension._                                                            | No       | `"*.uf2 *.elf *.elf.map"`    |
-| `board_name`          | _Name of the RP2040 board. Please refer to the Pico SDK documentation for a list of supported boards._                                                           | No       | `"pico"`                     |
 | `cmake_args`          | _Additional arguments to pass to CMake._                                                                                                                         | No       | `""`                         |
 | `output_ignored_dirs` | _A space-separated list of directories to ignore when copying binary build artifacts. `CMakeFiles`, `pico-sdk`, `pioasm`, and `elf2uf2` are ignored regardless._ | No       | `""`                         |
 | `cmake_config_only`   | _Only configure CMake and generate build files. Do not build the project._                                                                                       | No       | `"false"`                    |
@@ -88,4 +87,4 @@ Please take a look at <a href='https://github.com/samyarsadat/Pico-Build-Action/
 <br><br>
 
 
-Copyright © 2024 Samyar Sadat Akhavi.
+Copyright © 2024-2025 Samyar Sadat Akhavi.

@@ -25,11 +25,10 @@ DEFAULT_IGNORED_BUILD_DIRS=("CMakeFiles" "elf2uf2" "pico-sdk" "pioasm")
 SOURCE_DIR="$1"
 OUTPUT_DIR="$2"
 OUTPUT_EXT="$3"
-BOARD_NAME="$4"
-CMAKE_ARGS=$5
-OUTPUT_IGNORED_DIRS="$6"
-CMAKE_CONFIG_ONLY="$7"
-MAKEFILES_GENERATOR="$8"
+CMAKE_ARGS=$4
+OUTPUT_IGNORED_DIRS="$5"
+CMAKE_CONFIG_ONLY="$6"
+MAKEFILES_GENERATOR="$7"
 
 # Split output extensions and into array
 IFS=" " read -r -a BINARY_EXTENSIONS <<< "$OUTPUT_EXT"
@@ -47,10 +46,6 @@ fi
 if [ -z "$OUTPUT_DIR" ]; then
     echo "ERROR: Output directory not provided."
     exit 1
-fi
-
-if [ -z "$BOARD_NAME" ]; then
-    BOARD_NAME="pico"
 fi
 
 if [ -z "$MAKEFILES_GENERATOR" ]; then
@@ -77,7 +72,6 @@ echo "Configuration:"
 echo "SOURCE_DIR=$SOURCE_DIR"
 echo "OUTPUT_DIR=$OUTPUT_DIR"
 echo "BINARY_EXTENSIONS=${BINARY_EXTENSIONS[@]}"
-echo "BOARD_NAME=$BOARD_NAME"
 echo "CMAKE_ARGS=$CMAKE_ARGS"
 echo "IGNORED_BUILD_DIRS=${IGNORED_BUILD_DIRS[@]}"
 echo "CMAKE_CONFIG_ONLY=$CMAKE_CONFIG_ONLY"
@@ -86,7 +80,7 @@ echo "MAKEFILES_GENERATOR=$MAKEFILES_GENERATOR"
 # Build the project
 echo "Generating build files..."
 mkdir "$OUTPUT_DIR" && cd "$OUTPUT_DIR"
-cmake -DPICO_BOARD="$BOARD_NAME" -S "$SOURCE_DIR" -B "$OUTPUT_DIR" -G "$MAKEFILES_GENERATOR" $CMAKE_ARGS
+cmake -S "$SOURCE_DIR" -B "$OUTPUT_DIR" -G "$MAKEFILES_GENERATOR" $CMAKE_ARGS
 
 if [ "$CMAKE_CONFIG_ONLY" = "false" ]; then
     echo "Building project..."
