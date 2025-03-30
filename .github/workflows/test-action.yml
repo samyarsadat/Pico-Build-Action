@@ -36,6 +36,7 @@ jobs:
                   source_dir: "test_program"
                   output_dir: "build"
                   output_ext: "*.uf2 *.elf *.elf.map *.hex *.bin *.dis"
+                  output_ignored_dirs: "_deps"
                   cmake_args: "-DCMAKE_BUILD_TYPE=Debug"
 
             - name: Upload Build Artifacts
