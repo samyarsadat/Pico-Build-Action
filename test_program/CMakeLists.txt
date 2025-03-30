@@ -28,8 +28,9 @@ include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
 # Set project name and C/C++ standards
 string(TIMESTAMP DATEVER "%Y.%m.%d" UTC)
-project(Blink VERSION ${DATEVER} LANGUAGES C ASM)
+project(Blink VERSION ${DATEVER} LANGUAGES C CXX ASM)
 set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 # Initialize the Pico SDK
 pico_sdk_init()
@@ -50,3 +51,4 @@ pico_set_program_description(${PROJECT_NAME} "Pico Build Action - Simple blink t
 
 # CMake flags
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
